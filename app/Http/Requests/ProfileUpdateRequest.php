@@ -28,4 +28,17 @@ class ProfileUpdateRequest extends FormRequest
             ],
         ];
     }
+
+    /**
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Ad soyad zorunludur.',
+            'email.required' => 'E-posta zorunludur.',
+            'email.email' => 'Geçerli bir e-posta adresi girin.',
+            'email.unique' => 'Bu e-posta adresi zaten kullanılıyor.',
+        ];
+    }
 }

@@ -218,22 +218,25 @@ const appSettings = computed(() => page.props.appSettings ?? {});
                 ]"
             >
                 <header
-                    class="sticky top-0 z-30 flex h-16 items-center justify-between gap-4 border-b border-slate-200/70 bg-white/75 px-4 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/75 lg:px-10"
+                    class="sticky top-0 z-30 flex min-h-16 items-center justify-between gap-2 border-b border-slate-200/70 bg-white/75 px-3 py-2.5 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/75 sm:gap-3 sm:px-4 sm:py-3 lg:px-10"
                 >
-                    <div class="flex items-center gap-3">
+                    <div class="flex min-w-0 flex-1 items-center gap-2 sm:gap-3">
                         <button
                             type="button"
-                            class="inline-flex rounded-xl p-2 text-slate-600 transition hover:bg-slate-100 active:scale-95 dark:text-slate-300 dark:hover:bg-slate-800 lg:hidden"
+                            class="inline-flex shrink-0 rounded-xl p-2 text-slate-600 transition hover:bg-slate-100 active:scale-95 dark:text-slate-300 dark:hover:bg-slate-800 lg:hidden"
                             @click="mobileOpen = true"
                         >
                             <Bars3Icon class="h-6 w-6" />
                         </button>
-                        <div v-if="$slots.header" class="min-w-0">
+                        <div
+                            v-if="$slots.header"
+                            class="min-w-0 flex-1 break-words [overflow-wrap:anywhere]"
+                        >
                             <slot name="header" />
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-2 sm:gap-3">
+                    <div class="flex shrink-0 items-center gap-1.5 sm:gap-3">
                         <Dropdown align="right" width="64" content-classes="py-2 bg-white dark:bg-slate-800">
                             <template #trigger>
                                 <button

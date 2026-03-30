@@ -55,10 +55,9 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 ## PoliçeAsist — Veritabanı
 
-- **Canlı ortam:** [MySQL](https://dev.mysql.com/doc/) 8.x (veya MariaDB 10.6+), karakter seti `utf8mb4`. `.env` içinde `DB_CONNECTION=mysql`, `DB_HOST`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` tanımlayın.
-- **Yerel geliştirme:** İsterseniz `DB_CONNECTION=sqlite` ve `DB_DATABASE` ile tek dosyalı SQLite kullanmaya devam edebilirsiniz.
+- **Yerel ve canlı:** [MySQL](https://dev.mysql.com/doc/) 8.x (veya MariaDB 10.6+), karakter seti `utf8mb4`. Yerelde MySQL’i çalıştırıp bir veritabanı oluşturun (ör. `CREATE DATABASE policeasist CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`). `.env` içinde `DB_CONNECTION=mysql`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` tanımlayın; `.env.example` ile hizalayın.
 - Şema: `php artisan migrate` — örnek veri: `php artisan db:seed`.
-- Mevcut SQLite verisini MySQL’e taşımak için önce MySQL üzerinde migration çalıştırıp ardından veriyi dışa/içe aktarma veya uygun bir migrasyon aracı kullanın (şema uyumu gerekir).
+- **Testler:** `phpunit.xml` ayrı bir test veritabanı kullanır (`policeasist_test`). Yerelde oluşturun: `CREATE DATABASE policeasist_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;` — ardından `php artisan test`.
 
 ## License
 

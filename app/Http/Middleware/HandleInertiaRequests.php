@@ -42,6 +42,17 @@ class HandleInertiaRequests extends Middleware
                 'user' => $user,
             ],
             'appSettings' => static function (): array {
+                if (request()->is('install*')) {
+                    return [
+                        'logo_url' => null,
+                        'favicon_url' => null,
+                        'hero_screenshot_url' => null,
+                        'site_title' => 'Kurulum',
+                        'site_description' => '',
+                        'pricing_plans' => AppSetting::defaultPricingPlans(),
+                    ];
+                }
+
                 if (! Schema::hasTable('app_settings')) {
                     return [
                         'logo_url' => null,

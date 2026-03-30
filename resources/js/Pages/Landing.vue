@@ -156,9 +156,10 @@ function onInPageNavClick(e, href) {
         <header
             class="sticky top-0 z-50 border-b border-slate-200/90 bg-white/90 shadow-sm shadow-slate-900/[0.04] backdrop-blur-xl dark:border-slate-800/90 dark:bg-slate-950/90 dark:shadow-black/40"
         >
-            <div
-                class="relative mx-auto flex h-[4.25rem] max-w-6xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8"
-            >
+            <div class="px-4 sm:px-6 lg:px-8">
+                <div
+                    class="relative mx-auto flex h-[4.25rem] max-w-6xl items-center justify-between gap-3"
+                >
                 <a
                     href="/"
                     class="relative z-10 flex min-w-0 shrink-0 items-center"
@@ -252,15 +253,16 @@ function onInPageNavClick(e, href) {
                         </Link>
                     </div>
                 </div>
+                </div>
             </div>
 
             <!-- Mobil menü -->
             <div
                 id="landing-mobile-nav"
-                class="border-t border-slate-200/90 bg-gradient-to-b from-white to-slate-50/95 dark:border-slate-800 dark:from-slate-950 dark:to-slate-900 md:hidden"
+                class="border-t border-slate-200/90 bg-gradient-to-b from-white to-slate-50/95 px-4 dark:border-slate-800 dark:from-slate-950 dark:to-slate-900 sm:px-6 lg:px-8 md:hidden"
                 :class="mobileNavOpen ? 'block' : 'hidden'"
             >
-                <nav class="mx-auto max-w-6xl space-y-1 px-4 py-4" aria-label="Mobil sayfa bölümleri">
+                <nav class="mx-auto max-w-6xl space-y-1 py-4" aria-label="Mobil sayfa bölümleri">
                     <template v-for="item in navItems" :key="`m-${item.href}`">
                         <Link
                             v-if="item.isPage"
@@ -389,20 +391,39 @@ function onInPageNavClick(e, href) {
                                     loading="eager"
                                     decoding="async"
                                 />
+                                <!-- Mobil: görselin alt çerçevesi gibi tam genişlik şerit -->
+                                <div
+                                    class="absolute inset-x-0 bottom-0 z-10 border-t-2 border-white/35 bg-gradient-to-br from-[#1CBF65] via-[#19b35d] to-[#148a4a] px-4 py-2.5 text-center shadow-[0_-8px_24px_rgba(0,0,0,0.2)] ring-1 ring-inset ring-white/20 lg:hidden"
+                                >
+                                    <span
+                                        class="text-sm font-extrabold uppercase tracking-wide text-white drop-shadow-sm"
+                                    >
+                                        İlk Ay Ücretsiz
+                                    </span>
+                                </div>
                             </div>
                             <div
                                 v-else
-                                class="aspect-[16/10] w-full max-w-md rounded-2xl border border-dashed border-white/20 bg-white/[0.03] lg:max-w-none"
+                                class="relative aspect-[16/10] w-full max-w-md overflow-hidden rounded-2xl border border-dashed border-white/20 bg-white/[0.03] lg:max-w-none"
                                 aria-hidden="true"
-                            />
-                            <div
-                                class="relative z-10 mx-auto mt-4 flex w-full max-w-[18rem] justify-center lg:pointer-events-none lg:absolute lg:right-4 lg:top-0 lg:mt-0 lg:w-auto lg:max-w-none lg:-translate-y-3"
                             >
                                 <div
-                                    class="inline-flex items-center justify-center rounded-xl border-2 border-white/40 bg-gradient-to-br from-[#1CBF65] via-[#19b35d] to-[#148a4a] px-4 py-2.5 text-center shadow-[0_12px_40px_rgba(28,191,101,0.45)] ring-2 ring-black/10 lg:px-5 lg:py-3"
+                                    class="absolute inset-x-0 bottom-0 z-10 border-t-2 border-dashed border-white/25 bg-gradient-to-br from-[#1CBF65]/90 via-[#19b35d]/90 to-[#148a4a]/90 px-4 py-2.5 text-center lg:hidden"
+                                >
+                                    <span class="text-sm font-extrabold uppercase tracking-wide text-white drop-shadow-sm">
+                                        İlk Ay Ücretsiz
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- Masaüstü: sağ üstte kart rozet -->
+                            <div
+                                class="pointer-events-none absolute right-4 top-0 z-10 hidden w-auto max-w-none -translate-y-3 lg:block"
+                            >
+                                <div
+                                    class="inline-flex items-center justify-center rounded-xl border-2 border-white/40 bg-gradient-to-br from-[#1CBF65] via-[#19b35d] to-[#148a4a] px-5 py-3 text-center shadow-[0_12px_40px_rgba(28,191,101,0.45)] ring-2 ring-black/10"
                                 >
                                     <span
-                                        class="text-sm font-extrabold uppercase tracking-wide text-white drop-shadow-sm lg:text-base"
+                                        class="text-base font-extrabold uppercase tracking-wide text-white drop-shadow-sm"
                                     >
                                         İlk Ay Ücretsiz
                                     </span>
@@ -843,6 +864,11 @@ function onInPageNavClick(e, href) {
                                 </li>
                                 <li v-if="canRegister">
                                     <Link :href="route('register')" class="transition hover:text-[#4d8fd9]">Kayıt ol</Link>
+                                </li>
+                                <li>
+                                    <Link :href="route('guide')" class="transition hover:text-[#4d8fd9]">
+                                        Kullanım kılavuzu
+                                    </Link>
                                 </li>
                             </ul>
                         </div>

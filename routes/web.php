@@ -3,12 +3,13 @@
 use App\Http\Controllers\Admin\DemoRequestController;
 use App\Http\Controllers\Admin\SystemSettingsController;
 use App\Http\Controllers\Admin\SystemUserController;
-use App\Http\Controllers\DemoRequestPageController;
 use App\Http\Controllers\ClaimController;
 use App\Http\Controllers\CompanyPolicyTypeController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DefinitionsController;
+use App\Http\Controllers\DemoRequestPageController;
+use App\Http\Controllers\Install\InstallWizardController;
 use App\Http\Controllers\InsuranceCompanyController;
 use App\Http\Controllers\InsurancePolicyController;
 use App\Http\Controllers\LeadController;
@@ -20,6 +21,18 @@ use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+Route::middleware('install.open')->prefix('install')->group(function () {
+    Route::get('/', [InstallWizardController::class, 'welcome'])->name('install.welcome');
+    Route::get('/database', [InstallWizardController::class, 'databaseForm'])->name('install.database');
+    Route::post('/database', [InstallWizardController::class, 'databaseStore'])
+        ->middleware('throttle:12,1')
+        ->name('install.database.store');
+    Route::get('/admin', [InstallWizardController::class, 'adminForm'])->name('install.admin');
+    Route::post('/admin', [InstallWizardController::class, 'adminStore'])
+        ->middleware('throttle:6,1')
+        ->name('install.admin.store');
+});
+
 Route::get('/', function () {
     return Inertia::render('Landing', [
         'canLogin' => Route::has('login'),
@@ -28,6 +41,7 @@ Route::get('/', function () {
 });
 
 Route::get('/demo', [DemoRequestPageController::class, 'create'])->name('demo.request');
+Route::get('/kullanim-kilavuzu', fn () => Inertia::render('UserGuide'))->name('guide');
 Route::post('/demo', [DemoRequestPageController::class, 'store'])
     ->middleware('throttle:10,1')
     ->name('demo.request.store');
@@ -89,11 +103,9 @@ Route::middleware(['auth', 'verified', 'crm.access'])->group(function () {
     Route::resource('policy-types', PolicyTypeController::class);
 });
 
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';

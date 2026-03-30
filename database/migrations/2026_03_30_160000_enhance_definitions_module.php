@@ -31,7 +31,7 @@ return new class extends Migration
             $table->decimal('commission_percent', 6, 2);
             $table->timestamps();
 
-            $table->unique(['insurance_company_id', 'policy_type_id']);
+            $table->unique(['insurance_company_id', 'policy_type_id'], 'ic_pt_company_type_unique');
         });
     }
 

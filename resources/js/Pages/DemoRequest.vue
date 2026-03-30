@@ -7,17 +7,6 @@ import PaToastHost from '@/Components/PaToastHost.vue';
 import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
 import { computed, watch } from 'vue';
 
-defineProps({
-    canLogin: {
-        type: Boolean,
-        default: false,
-    },
-    canRegister: {
-        type: Boolean,
-        default: false,
-    },
-});
-
 const page = usePage();
 const appSettings = computed(() => page.props.appSettings ?? {});
 
@@ -87,22 +76,12 @@ function submit() {
                         <ApplicationLogo class="h-full w-full text-white" />
                     </div>
                 </Link>
-                <div class="flex items-center gap-2 text-sm">
-                    <Link
-                        v-if="canLogin"
-                        :href="route('login')"
-                        class="rounded-full px-3 py-1.5 font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
-                    >
-                        Giriş
-                    </Link>
-                    <Link
-                        v-if="canRegister"
-                        :href="route('register')"
-                        class="rounded-full bg-gradient-to-r from-[#064AAD] to-[#0558c9] px-4 py-1.5 font-semibold text-white shadow-md shadow-[#064AAD]/25"
-                    >
-                        Kayıt ol
-                    </Link>
-                </div>
+                <Link
+                    href="/"
+                    class="rounded-full bg-gradient-to-r from-[#064AAD] to-[#0558c9] px-4 py-1.5 text-sm font-semibold text-white shadow-md shadow-[#064AAD]/25 transition hover:scale-[1.02] hover:shadow-lg hover:shadow-[#064AAD]/35 active:scale-[0.98]"
+                >
+                    Ana Sayfaya Dön
+                </Link>
             </div>
         </header>
 
@@ -135,12 +114,6 @@ function submit() {
                         Güvenli veri ve kurumsal kullanım
                     </li>
                 </ul>
-                <Link
-                    href="/"
-                    class="mt-10 inline-flex w-fit items-center gap-2 text-sm font-semibold text-[#064AAD] transition hover:text-[#053d8f] dark:text-[#4d8fd9]"
-                >
-                    ← Ana sayfaya dön
-                </Link>
             </div>
 
             <!-- Sağ: form -->

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDemoRequestRequest;
 use App\Models\DemoRequest;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -13,10 +12,7 @@ class DemoRequestPageController extends Controller
 {
     public function create(): Response
     {
-        return Inertia::render('DemoRequest', [
-            'canLogin' => Route::has('login'),
-            'canRegister' => Route::has('register'),
-        ]);
+        return Inertia::render('DemoRequest');
     }
 
     public function store(StoreDemoRequestRequest $request): RedirectResponse

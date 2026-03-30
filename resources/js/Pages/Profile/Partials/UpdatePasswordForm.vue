@@ -37,18 +37,26 @@ const updatePassword = () => {
     <section>
         <header>
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                Update Password
+                Şifre güncelleme
             </h2>
 
             <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Ensure your account is using a long, random password to stay
-                secure.
+                Güvenliğiniz için güçlü bir şifre kullanın. Aşağıdaki kurallar zorunludur.
             </p>
+            <ul
+                class="mt-3 list-inside list-disc rounded-lg border border-gray-200 bg-gray-50 px-3 py-2.5 text-xs text-gray-600 dark:border-gray-600 dark:bg-gray-900/50 dark:text-gray-400"
+            >
+                <li>En az <strong class="text-gray-800 dark:text-gray-200">8 karakter</strong></li>
+                <li>
+                    <strong class="text-gray-800 dark:text-gray-200">Yeni şifre</strong> ile
+                    <strong class="text-gray-800 dark:text-gray-200">yeni şifre tekrar</strong> aynı olmalıdır
+                </li>
+            </ul>
         </header>
 
         <form @submit.prevent="updatePassword" class="mt-6 space-y-6">
             <div>
-                <InputLabel for="current_password" value="Current Password" />
+                <InputLabel for="current_password" value="Mevcut şifre" />
 
                 <TextInput
                     id="current_password"
@@ -66,7 +74,7 @@ const updatePassword = () => {
             </div>
 
             <div>
-                <InputLabel for="password" value="New Password" />
+                <InputLabel for="password" value="Yeni şifre" />
 
                 <TextInput
                     id="password"
@@ -81,10 +89,7 @@ const updatePassword = () => {
             </div>
 
             <div>
-                <InputLabel
-                    for="password_confirmation"
-                    value="Confirm Password"
-                />
+                <InputLabel for="password_confirmation" value="Yeni şifre tekrar" />
 
                 <TextInput
                     id="password_confirmation"
@@ -101,7 +106,7 @@ const updatePassword = () => {
             </div>
 
             <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+                <PrimaryButton :disabled="form.processing">Şifreyi güncelle</PrimaryButton>
 
                 <Transition
                     enter-active-class="transition ease-in-out"
@@ -113,7 +118,7 @@ const updatePassword = () => {
                         v-if="form.recentlySuccessful"
                         class="text-sm text-gray-600 dark:text-gray-400"
                     >
-                        Saved.
+                        Güncellendi.
                     </p>
                 </Transition>
             </div>
